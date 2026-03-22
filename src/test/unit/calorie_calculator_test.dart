@@ -1,5 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:calorhythm/core/utils/calorie_calculator.dart';
+import 'package:calorhythm/application/services/calorie_calculator.dart';
 
 void main() {
   group('calculateCalories', () {
@@ -9,6 +9,7 @@ void main() {
         metValue: 8.0,
         weightKg: 70,
         durationSeconds: 3600,
+        useRepMultiplier: false,
       );
       expect(result, closeTo(560.0, 0.01));
     });
@@ -18,6 +19,7 @@ void main() {
         metValue: 8.0,
         weightKg: 70,
         durationSeconds: 1800,
+        useRepMultiplier: false,
       );
       expect(result, closeTo(280.0, 0.01));
     });
@@ -29,29 +31,33 @@ void main() {
         metValue: 5.0,
         weightKg: 70,
         durationSeconds: 60,
+        useRepMultiplier: false,
       );
       final withReps = calculateCalories(
         metValue: 5.0,
         weightKg: 70,
         durationSeconds: 60,
+        useRepMultiplier: true,
         actualReps: 40,
         referenceRepsPerMinute: 20,
       );
       expect(withReps, closeTo(base * 2, 0.01));
     });
 
-    test('ignores rep multiplier when referenceRepsPerMinute is null', () {
+    test('ignores rep multiplier when useRepMultiplier is false', () {
       final base = calculateCalories(
         metValue: 5.0,
         weightKg: 70,
         durationSeconds: 60,
+        useRepMultiplier: false,
       );
       final withReps = calculateCalories(
         metValue: 5.0,
         weightKg: 70,
         durationSeconds: 60,
+        useRepMultiplier: false,
         actualReps: 40,
-        referenceRepsPerMinute: null,
+        referenceRepsPerMinute: 20,
       );
       expect(withReps, closeTo(base, 0.01));
     });
