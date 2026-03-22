@@ -52,10 +52,12 @@ class ExerciseEntryDao extends DatabaseAccessor<AppDatabase>
             exerciseEntryTable.exerciseId.equals(exerciseId),
       );
 
-    return query.map((row) => ExerciseEntryWithName(
-          entry: row.readTable(exerciseEntryTable),
-          exerciseName: row.readTable(exerciseTable).name,
-        )).getSingleOrNull();
+    return query
+        .map((row) => ExerciseEntryWithName(
+              entry: row.readTable(exerciseEntryTable),
+              exerciseName: row.readTable(exerciseTable).name,
+            ))
+        .getSingleOrNull();
   }
 
   /// Replaces the full entry row. Because the DB has a unique constraint on
@@ -85,25 +87,39 @@ class ExerciseEntryDao extends DatabaseAccessor<AppDatabase>
       ..orderBy([OrderingTerm.desc(lastUsed)])
       ..limit(limit);
 
-    return query.map((row) => ExerciseTableData(
-          id: row.read(exerciseTable.id)!,
-          name: row.read(exerciseTable.name)!,
-          metValue: row.read(exerciseTable.metValue)!,
-          colorHex: row.read(exerciseTable.colorHex)!,
-          iconName: row.read(exerciseTable.iconName)!,
-          referenceRepsPerMinute: row.read(exerciseTable.referenceRepsPerMinute),
-        )).get();
+    return query
+        .map((row) => ExerciseTableData(
+              id: row.read(exerciseTable.id)!,
+              name: row.read(exerciseTable.name)!,
+              metValue: row.read(exerciseTable.metValue)!,
+              colorHex: row.read(exerciseTable.colorHex)!,
+              iconName: row.read(exerciseTable.iconName)!,
+              referenceRepsPerMinute:
+                  row.read(exerciseTable.referenceRepsPerMinute),
+            ))
+        .get();
   }
 
   /// Returns exercise breakdown (name, color, total duration, total calories) for all
   /// completed sessions that started within [from]..[to].
-  Future<List<({String exerciseName, String colorHex, int totalSeconds, double totalCalories})>>
-      getExerciseBreakdownForRange(DateTime from, DateTime to) {
+  Future<
+      List<
+          ({
+            String exerciseName,
+            String colorHex,
+            int totalSeconds,
+            double totalCalories
+          })>> getExerciseBreakdownForRange(DateTime from, DateTime to) {
     final totalDuration = exerciseEntryTable.totalDurationSeconds.sum();
     final totalCalories = exerciseEntryTable.caloriesBurned.sum();
 
     final query = selectOnly(exerciseEntryTable)
-      ..addColumns([exerciseTable.name, exerciseTable.colorHex, totalDuration, totalCalories])
+      ..addColumns([
+        exerciseTable.name,
+        exerciseTable.colorHex,
+        totalDuration,
+        totalCalories
+      ])
       ..join([
         innerJoin(
           workoutSessionTable,
@@ -131,7 +147,6 @@ class ExerciseEntryDao extends DatabaseAccessor<AppDatabase>
   }
 
   Future<int> deleteForSession(int sessionId) =>
-      (delete(exerciseEntryTable)
-            ..where((t) => t.sessionId.equals(sessionId)))
+      (delete(exerciseEntryTable)..where((t) => t.sessionId.equals(sessionId)))
           .go();
 }

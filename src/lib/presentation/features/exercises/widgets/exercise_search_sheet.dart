@@ -108,8 +108,7 @@ class _ExerciseSearchSheetState extends ConsumerState<ExerciseSearchSheet> {
                             Navigator.of(context).pop(exercises[index]),
                       ),
                     ),
-              loading: () =>
-                  const Center(child: CircularProgressIndicator()),
+              loading: () => const Center(child: CircularProgressIndicator()),
               error: (e, _) => Center(child: Text('Error: $e')),
             ),
           ),

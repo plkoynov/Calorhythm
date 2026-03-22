@@ -62,5 +62,4 @@ class ExerciseTimer extends _$ExerciseTimer {
     _ticker?.cancel();
     state = const TimerState();
   }
-
 }

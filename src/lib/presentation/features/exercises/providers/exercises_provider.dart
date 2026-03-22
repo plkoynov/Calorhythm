@@ -98,4 +98,3 @@ class SessionManager extends _$SessionManager {
     ref.invalidate(sessionEntriesProvider);
   }
 }
-

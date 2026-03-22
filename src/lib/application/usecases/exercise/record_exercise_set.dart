@@ -30,7 +30,8 @@ class RecordExerciseSet {
     bool useRepMultiplier = false,
   }) async {
     final exercise = await _exerciseRepository.getById(exerciseId);
-    if (exercise == null) throw ArgumentError('Unknown exerciseId: $exerciseId');
+    if (exercise == null)
+      throw ArgumentError('Unknown exerciseId: $exerciseId');
 
     final session = await _sessionRepository.getById(sessionId);
     if (session == null) throw ArgumentError('Unknown sessionId: $sessionId');

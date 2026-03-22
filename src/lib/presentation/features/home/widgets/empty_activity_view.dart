@@ -41,9 +41,7 @@ class EmptyActivityView extends ConsumerWidget {
             const SizedBox(height: 28),
             FilledButton.icon(
               onPressed: () async {
-                await ref
-                    .read(sessionManagerProvider.notifier)
-                    .startSession();
+                await ref.read(sessionManagerProvider.notifier).startSession();
                 if (context.mounted) context.go(AppRoutes.workout);
               },
               icon: const Icon(Icons.fitness_center_outlined, size: 18),

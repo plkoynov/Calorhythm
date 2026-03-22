@@ -16,8 +16,10 @@ class GetStatistics {
   final WorkoutSessionRepository _sessionRepository;
 
   Future<WorkoutStatistics> forToday() => _forRange(_todayStart(), _todayEnd());
-  Future<WorkoutStatistics> forThisWeek() => _forRange(_weekStart(), _todayEnd());
-  Future<WorkoutStatistics> forThisMonth() => _forRange(_monthStart(), _todayEnd());
+  Future<WorkoutStatistics> forThisWeek() =>
+      _forRange(_weekStart(), _todayEnd());
+  Future<WorkoutStatistics> forThisMonth() =>
+      _forRange(_monthStart(), _todayEnd());
 
   Future<WorkoutStatistics> _forRange(DateTime from, DateTime to) async {
     final (:sessionCount, :totalCalories) =

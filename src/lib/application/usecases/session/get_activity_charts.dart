@@ -44,8 +44,7 @@ class GetActivityCharts {
     return _caloriesPerDay(monthStart, daysInMonth);
   }
 
-  Future<List<DailyCalories>> _caloriesPerDay(
-      DateTime start, int days) async {
+  Future<List<DailyCalories>> _caloriesPerDay(DateTime start, int days) async {
     final results = <DailyCalories>[];
     for (int i = 0; i < days; i++) {
       final day = DateTime(start.year, start.month, start.day + i);

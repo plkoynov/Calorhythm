@@ -71,8 +71,7 @@ SearchExercises searchExercises(Ref ref) =>
     SearchExercises(ref.watch(exerciseRepositoryProvider));
 
 @riverpod
-StartWorkoutSession startWorkoutSession(Ref ref) =>
-    StartWorkoutSession(
+StartWorkoutSession startWorkoutSession(Ref ref) => StartWorkoutSession(
       profileRepository: ref.watch(profileRepositoryProvider),
       sessionRepository: ref.watch(sessionRepositoryProvider),
     );
@@ -106,8 +105,7 @@ GetRecentExercises getRecentExercises(Ref ref) =>
     GetRecentExercises(ref.watch(entryRepositoryProvider));
 
 @riverpod
-RecordExerciseSet recordExerciseSet(Ref ref) =>
-    RecordExerciseSet(
+RecordExerciseSet recordExerciseSet(Ref ref) => RecordExerciseSet(
       exerciseRepository: ref.watch(exerciseRepositoryProvider),
       sessionRepository: ref.watch(sessionRepositoryProvider),
       entryRepository: ref.watch(entryRepositoryProvider),
@@ -118,8 +116,7 @@ GetStatistics getStatistics(Ref ref) =>
     GetStatistics(ref.watch(sessionRepositoryProvider));
 
 @riverpod
-GetActivityCharts getActivityCharts(Ref ref) =>
-    GetActivityCharts(
+GetActivityCharts getActivityCharts(Ref ref) => GetActivityCharts(
       sessionRepository: ref.watch(sessionRepositoryProvider),
       entryRepository: ref.watch(entryRepositoryProvider),
     );

@@ -40,10 +40,10 @@ class SessionStatusBadge extends StatelessWidget {
       child: Text(
         label,
         style: Theme.of(context).textTheme.labelSmall?.copyWith(
-          color: foreground,
-          fontWeight: FontWeight.w600,
-          letterSpacing: 0.3,
-        ),
+              color: foreground,
+              fontWeight: FontWeight.w600,
+              letterSpacing: 0.3,
+            ),
       ),
     );
   }

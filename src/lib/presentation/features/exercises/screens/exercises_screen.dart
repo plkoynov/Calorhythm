@@ -14,8 +14,9 @@ class ExercisesScreen extends ConsumerWidget {
 
     return sessionAsync.when(
       data: (session) => session == null
-          ? NoSessionView(onStart: () =>
-              ref.read(sessionManagerProvider.notifier).startSession())
+          ? NoSessionView(
+              onStart: () =>
+                  ref.read(sessionManagerProvider.notifier).startSession())
           : ActiveSessionView(session: session),
       loading: () => const Scaffold(
         body: Center(child: CircularProgressIndicator()),

@@ -75,4 +75,3 @@ class SessionListItem extends ConsumerWidget {
     );
   }
 }
-

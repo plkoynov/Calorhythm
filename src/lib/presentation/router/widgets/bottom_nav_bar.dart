@@ -8,7 +8,11 @@ typedef _Destination = ({IconData icon, String label, String route});
 
 const _destinations = <_Destination>[
   (icon: Icons.home_outlined, label: 'Home', route: AppRoutes.home),
-  (icon: Icons.fitness_center_outlined, label: 'Workout', route: AppRoutes.workout),
+  (
+    icon: Icons.fitness_center_outlined,
+    label: 'Workout',
+    route: AppRoutes.workout
+  ),
   (icon: Icons.history_outlined, label: 'History', route: AppRoutes.history),
   (icon: Icons.person_outline, label: 'Profile', route: AppRoutes.profile),
 ];

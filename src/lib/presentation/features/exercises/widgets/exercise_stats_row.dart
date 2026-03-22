@@ -19,9 +19,7 @@ class ExerciseStatsRow extends StatelessWidget {
     ];
 
     return Row(
-      children: items
-          .expand((w) => [w, const SizedBox(width: 12)])
-          .toList()
+      children: items.expand((w) => [w, const SizedBox(width: 12)]).toList()
         ..removeLast(),
     );
   }

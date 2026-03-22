@@ -37,8 +37,7 @@ class _ExerciseTimerScreenState extends ConsumerState<ExerciseTimerScreen> {
 
     return exercisesAsync.when(
       data: (exercises) {
-        final exercise =
-            exercises.firstWhere((e) => e.id == widget.exerciseId);
+        final exercise = exercises.firstWhere((e) => e.id == widget.exerciseId);
 
         final isActive = timerState.status == TimerStatus.running ||
             timerState.status == TimerStatus.paused;
@@ -91,15 +90,12 @@ class _ExerciseTimerScreenState extends ConsumerState<ExerciseTimerScreen> {
                         TimerControls(
                           status: timerState.status,
                           saving: _saving,
-                          onStart: () => ref
-                              .read(exerciseTimerProvider.notifier)
-                              .start(),
-                          onPause: () => ref
-                              .read(exerciseTimerProvider.notifier)
-                              .pause(),
-                          onResume: () => ref
-                              .read(exerciseTimerProvider.notifier)
-                              .resume(),
+                          onStart: () =>
+                              ref.read(exerciseTimerProvider.notifier).start(),
+                          onPause: () =>
+                              ref.read(exerciseTimerProvider.notifier).pause(),
+                          onResume: () =>
+                              ref.read(exerciseTimerProvider.notifier).resume(),
                           onFinish: () => _onFinish(
                             exercise: exercise,
                             elapsedSeconds: timerState.elapsedSeconds,

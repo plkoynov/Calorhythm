@@ -28,8 +28,7 @@ class ProfileRepositoryImpl implements ProfileRepository {
         name: Value(profile.name),
         weightKg: Value(profile.weightKg),
         heightCm: Value(profile.heightCm),
-        useRepMultiplierForCalories:
-            Value(profile.useRepMultiplierForCalories),
+        useRepMultiplierForCalories: Value(profile.useRepMultiplierForCalories),
       ),
     );
   }

@@ -22,9 +22,8 @@ class CircularTimer extends StatelessWidget {
   Widget build(BuildContext context) {
     final elapsed = timerState.elapsedSeconds;
     final lapIndex = elapsed ~/ 60;
-    final progress = timerState.status == TimerStatus.idle
-        ? 0.0
-        : (elapsed % 60) / 60.0;
+    final progress =
+        timerState.status == TimerStatus.idle ? 0.0 : (elapsed % 60) / 60.0;
     final color = _lapColors[lapIndex % _lapColors.length];
 
     return SizedBox(

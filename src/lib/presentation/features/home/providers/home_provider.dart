@@ -25,8 +25,7 @@ Future<WorkoutStatistics> monthStats(Ref ref) =>
 // ---------------------------------------------------------------------------
 
 @riverpod
-Future<List<ExerciseBreakdownEntry>> todayPieChart(
-        Ref ref) =>
+Future<List<ExerciseBreakdownEntry>> todayPieChart(Ref ref) =>
     ref.watch(getActivityChartsProvider).forTodayPieChart();
 
 @riverpod

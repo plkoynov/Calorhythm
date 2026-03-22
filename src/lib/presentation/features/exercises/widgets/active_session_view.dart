@@ -50,12 +50,14 @@ class ActiveSessionView extends ConsumerWidget {
                                     padding: const EdgeInsets.only(bottom: 8),
                                     child: SessionExerciseTile(
                                       entry: e,
-                                      onTap: () => _navigateToTimer(context, e.exerciseId),
+                                      onTap: () => _navigateToTimer(
+                                          context, e.exerciseId),
                                     ),
                                   ))
                               .toList(),
                         ),
-                  loading: () => const Center(child: CircularProgressIndicator()),
+                  loading: () =>
+                      const Center(child: CircularProgressIndicator()),
                   error: (e, _) => Text('Error: $e'),
                 ),
                 const SizedBox(height: 24),
@@ -74,7 +76,8 @@ class ActiveSessionView extends ConsumerWidget {
                           exercises: exercises,
                           onTap: (ex) => _navigateToTimer(context, ex.id),
                         ),
-                  loading: () => const Center(child: CircularProgressIndicator()),
+                  loading: () =>
+                      const Center(child: CircularProgressIndicator()),
                   error: (e, _) => Text('Error: $e'),
                 ),
               ],
@@ -122,7 +125,8 @@ class ActiveSessionView extends ConsumerWidget {
       context: context,
       builder: (ctx) => AlertDialog(
         title: const Text('Finish workout?'),
-        content: const Text('This will end your current session and save all progress.'),
+        content: const Text(
+            'This will end your current session and save all progress.'),
         actions: [
           TextButton(
             onPressed: () => Navigator.of(ctx).pop(false),
@@ -137,7 +141,9 @@ class ActiveSessionView extends ConsumerWidget {
       ),
     );
     if (confirmed == true) {
-      await ref.read(sessionManagerProvider.notifier).completeSession(sessionId);
+      await ref
+          .read(sessionManagerProvider.notifier)
+          .completeSession(sessionId);
     }
   }
 }

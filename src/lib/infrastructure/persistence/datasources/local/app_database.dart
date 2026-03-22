@@ -20,7 +20,12 @@ export '../../models/workout_session_table.dart';
 part 'app_database.g.dart';
 
 @DriftDatabase(
-  tables: [ExerciseTable, WorkoutSessionTable, ExerciseEntryTable, ProfileTable],
+  tables: [
+    ExerciseTable,
+    WorkoutSessionTable,
+    ExerciseEntryTable,
+    ProfileTable
+  ],
   daos: [ExerciseDao, WorkoutSessionDao, ExerciseEntryDao, ProfileDao],
 )
 class AppDatabase extends _$AppDatabase {

@@ -9,8 +9,18 @@ extension DateTimeFormatting on DateTime {
   /// Returns 'dd MMM yyyy' formatted string (e.g. '14 Mar 2026').
   String get dateLabel {
     const months = [
-      'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
-      'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec',
+      'Jan',
+      'Feb',
+      'Mar',
+      'Apr',
+      'May',
+      'Jun',
+      'Jul',
+      'Aug',
+      'Sep',
+      'Oct',
+      'Nov',
+      'Dec',
     ];
     return '${day.toString().padLeft(2, '0')} ${months[month - 1]} $year';
   }
