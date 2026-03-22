@@ -26,6 +26,40 @@ class WorkoutSessionDao extends DatabaseAccessor<AppDatabase>
             ..limit(limit, offset: offset))
           .get();
 
+  Future<List<WorkoutSessionTableData>> getPageFiltered(
+    int limit,
+    int offset, {
+    Set<SessionStatus>? statuses,
+    DateTime? from,
+    DateTime? to,
+  }) {
+    final query = select(workoutSessionTable)
+      ..orderBy([(t) => OrderingTerm.desc(t.startTime)])
+      ..limit(limit, offset: offset);
+
+    if (statuses != null && statuses.isNotEmpty) {
+      query.where((t) {
+        Expression<bool>? expr;
+        for (final s in statuses) {
+          final e = t.status.equalsValue(s);
+          expr = expr == null ? e : expr | e;
+        }
+        return expr!;
+      });
+    }
+
+    if (from != null) {
+      query.where((t) => t.startTime.isBiggerOrEqualValue(from));
+    }
+
+    if (to != null) {
+      final endOfDay = DateTime(to.year, to.month, to.day, 23, 59, 59, 999);
+      query.where((t) => t.startTime.isSmallerOrEqualValue(endOfDay));
+    }
+
+    return query.get();
+  }
+
   Future<List<WorkoutSessionTableData>> getCompleted() =>
       (select(workoutSessionTable)
             ..where((t) => t.status.equalsValue(SessionStatus.completed))
