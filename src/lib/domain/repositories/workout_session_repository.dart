@@ -10,6 +10,16 @@ abstract interface class WorkoutSessionRepository {
   /// Returns a page of sessions (any status) ordered by startTime descending.
   Future<List<WorkoutSession>> getPage(int limit, int offset);
 
+  /// Returns a filtered page of sessions ordered by startTime descending.
+  /// Passing an empty [statuses] set or null means no status filter.
+  Future<List<WorkoutSession>> getPageFiltered(
+    int limit,
+    int offset, {
+    Set<SessionStatus>? statuses,
+    DateTime? from,
+    DateTime? to,
+  });
+
   /// Returns all completed sessions ordered by startTime descending.
   Future<List<WorkoutSession>> getCompleted();
 

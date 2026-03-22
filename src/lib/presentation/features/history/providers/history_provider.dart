@@ -3,6 +3,7 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import 'package:calorhythm/di/app_providers.dart';
 import 'package:calorhythm/domain/entities/exercise_entry.dart';
+import 'package:calorhythm/application/dtos/workout_history_filter.dart';
 import 'package:calorhythm/domain/entities/workout_session.dart';
 
 part 'history_provider.g.dart';
@@ -13,22 +14,26 @@ class WorkoutHistoryState {
   const WorkoutHistoryState({
     required this.sessions,
     required this.hasMore,
+    required this.filter,
     this.isLoadingMore = false,
   });
 
   final List<WorkoutSession> sessions;
   final bool hasMore;
   final bool isLoadingMore;
+  final WorkoutHistoryFilter filter;
 
   WorkoutHistoryState copyWith({
     List<WorkoutSession>? sessions,
     bool? hasMore,
     bool? isLoadingMore,
+    WorkoutHistoryFilter? filter,
   }) =>
       WorkoutHistoryState(
         sessions: sessions ?? this.sessions,
         hasMore: hasMore ?? this.hasMore,
         isLoadingMore: isLoadingMore ?? this.isLoadingMore,
+        filter: filter ?? this.filter,
       );
 }
 
@@ -36,12 +41,14 @@ class WorkoutHistoryState {
 class WorkoutHistoryNotifier extends _$WorkoutHistoryNotifier {
   @override
   Future<WorkoutHistoryState> build() async {
+    const filter = WorkoutHistoryFilter();
     final sessions = await ref
         .watch(getWorkoutHistoryProvider)
-        .call(limit: _pageSize, offset: 0);
+        .call(limit: _pageSize, offset: 0, filter: filter);
     return WorkoutHistoryState(
       sessions: sessions,
       hasMore: sessions.length == _pageSize,
+      filter: filter,
     );
   }
 
@@ -51,14 +58,30 @@ class WorkoutHistoryNotifier extends _$WorkoutHistoryNotifier {
 
     state = AsyncData(current.copyWith(isLoadingMore: true));
 
-    final next = await ref
-        .read(getWorkoutHistoryProvider)
-        .call(limit: _pageSize, offset: current.sessions.length);
+    final next = await ref.read(getWorkoutHistoryProvider).call(
+          limit: _pageSize,
+          offset: current.sessions.length,
+          filter: current.filter,
+        );
 
     state = AsyncData(
       WorkoutHistoryState(
         sessions: [...current.sessions, ...next],
         hasMore: next.length == _pageSize,
+        filter: current.filter,
+      ),
+    );
+  }
+
+  Future<void> applyFilter(WorkoutHistoryFilter filter) async {
+    final sessions = await ref
+        .read(getWorkoutHistoryProvider)
+        .call(limit: _pageSize, offset: 0, filter: filter);
+    state = AsyncData(
+      WorkoutHistoryState(
+        sessions: sessions,
+        hasMore: sessions.length == _pageSize,
+        filter: filter,
       ),
     );
   }

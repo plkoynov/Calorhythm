@@ -26,6 +26,24 @@ class WorkoutSessionRepositoryImpl implements WorkoutSessionRepository {
   }
 
   @override
+  Future<List<WorkoutSession>> getPageFiltered(
+    int limit,
+    int offset, {
+    Set<SessionStatus>? statuses,
+    DateTime? from,
+    DateTime? to,
+  }) async {
+    final rows = await _db.workoutSessionDao.getPageFiltered(
+      limit,
+      offset,
+      statuses: statuses,
+      from: from,
+      to: to,
+    );
+    return rows.map(_toEntity).toList();
+  }
+
+  @override
   Future<List<WorkoutSession>> getCompleted() async {
     final rows = await _db.workoutSessionDao.getCompleted();
     return rows.map(_toEntity).toList();
