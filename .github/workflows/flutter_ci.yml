@@ -1,0 +1,42 @@
+name: Flutter CI
+
+on:
+  push:
+    branches: [main, develop]
+  pull_request:
+    branches: [main, develop]
+
+jobs:
+  analyze_and_test:
+    name: Analyze & Test
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '3.22.x'
+          channel: 'stable'
+          cache: true
+
+      - name: Install dependencies
+        run: flutter pub get
+        working-directory: src
+
+      - name: Run code generation
+        run: dart run build_runner build --delete-conflicting-outputs
+        working-directory: src
+
+      - name: Analyze
+        run: flutter analyze
+        working-directory: src
+
+      - name: Run tests
+        run: flutter test --coverage
+        working-directory: src
+
+      - name: Check formatting
+        run: dart format --output=none --set-exit-if-changed .
+        working-directory: src
