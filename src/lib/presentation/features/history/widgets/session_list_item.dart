@@ -6,8 +6,8 @@ import 'package:calorhythm/presentation/extensions/datetime_extension.dart';
 import 'package:calorhythm/domain/entities/workout_session.dart';
 import 'package:calorhythm/presentation/router/app_router.dart';
 import 'package:calorhythm/presentation/features/history/providers/history_provider.dart';
-import 'info_row.dart';
-import 'session_status_badge.dart';
+import 'package:calorhythm/presentation/features/history/widgets/info_row.dart';
+import 'package:calorhythm/presentation/features/history/widgets/session_status_badge.dart';
 
 class SessionListItem extends ConsumerWidget {
   const SessionListItem({super.key, required this.session});
@@ -30,10 +30,16 @@ class SessionListItem extends ConsumerWidget {
     return Card(
       child: InkWell(
         borderRadius: BorderRadius.circular(12),
-        onTap: () => context.go(
-          '${AppRoutes.history}/${session.id}',
-          extra: session,
-        ),
+        onTap: () {
+          if (session.isInProgress) {
+            context.go(AppRoutes.workout);
+          } else {
+            context.go(
+              '${AppRoutes.history}/${session.id}',
+              extra: session,
+            );
+          }
+        },
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
           child: Row(
