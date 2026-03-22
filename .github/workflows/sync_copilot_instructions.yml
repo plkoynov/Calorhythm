@@ -1,0 +1,40 @@
+name: Sync Copilot Instructions
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'docs/rules/**'
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Generate copilot-instructions.md
+        run: |
+          OUTPUT=".github/copilot-instructions.md"
+          echo "# Project Rules" > "$OUTPUT"
+          echo "" >> "$OUTPUT"
+          echo "> Auto-generated from \`docs/rules/\`. Edit source files there, not here." >> "$OUTPUT"
+
+          for file in docs/rules/architecture.md docs/rules/coding.md docs/rules/domain.md docs/rules/application.md docs/rules/infrastructure.md docs/rules/presentation.md docs/rules/di.md docs/rules/review.md; do
+            if [ -f "$file" ]; then
+              echo "" >> "$OUTPUT"
+              echo "---" >> "$OUTPUT"
+              echo "" >> "$OUTPUT"
+              cat "$file" >> "$OUTPUT"
+            fi
+          done
+
+      - name: Commit if changed
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add .github/copilot-instructions.md
+          git diff --staged --quiet || git commit -m "chore: sync copilot instructions from docs/rules"
+          git push

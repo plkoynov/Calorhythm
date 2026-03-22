@@ -7,6 +7,9 @@ abstract interface class WorkoutSessionRepository {
   /// Used on app start for crash recovery.
   Future<WorkoutSession?> getInProgress();
 
+  /// Returns a page of sessions (any status) ordered by startTime descending.
+  Future<List<WorkoutSession>> getPage(int limit, int offset);
+
   /// Returns all completed sessions ordered by startTime descending.
   Future<List<WorkoutSession>> getCompleted();
 

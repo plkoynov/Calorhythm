@@ -6,5 +6,8 @@ class GetWorkoutHistory {
 
   final WorkoutSessionRepository _sessionRepository;
 
-  Future<List<WorkoutSession>> call() => _sessionRepository.getCompleted();
+  Future<List<WorkoutSession>> call({
+    required int limit,
+    required int offset,
+  }) => _sessionRepository.getPage(limit, offset);
 }

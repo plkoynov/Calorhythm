@@ -6,25 +6,61 @@ import 'package:calorhythm/presentation/features/history/providers/history_provi
 import 'package:calorhythm/presentation/features/history/widgets/empty_history_view.dart';
 import 'package:calorhythm/presentation/features/history/widgets/session_list_item.dart';
 
-class HistoryScreen extends ConsumerWidget {
+class HistoryScreen extends ConsumerStatefulWidget {
   const HistoryScreen({super.key});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final historyAsync = ref.watch(workoutHistoryProvider);
+  ConsumerState<HistoryScreen> createState() => _HistoryScreenState();
+}
+
+class _HistoryScreenState extends ConsumerState<HistoryScreen> {
+  final _scrollController = ScrollController();
+
+  @override
+  void initState() {
+    super.initState();
+    _scrollController.addListener(_onScroll);
+  }
+
+  @override
+  void dispose() {
+    _scrollController.dispose();
+    super.dispose();
+  }
+
+  void _onScroll() {
+    final pos = _scrollController.position;
+    if (pos.pixels >= pos.maxScrollExtent - 200) {
+      ref.read(workoutHistoryNotifierProvider.notifier).loadNextPage();
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final historyAsync = ref.watch(workoutHistoryNotifierProvider);
 
     return Scaffold(
       appBar: AppBar(title: const Text(AppStrings.historyTitle)),
       body: historyAsync.when(
-        data: (sessions) => sessions.isEmpty
-            ? const EmptyHistoryView()
-            : ListView.separated(
-                padding: const EdgeInsets.all(16),
-                itemCount: sessions.length,
-                separatorBuilder: (_, __) => const SizedBox(height: 8),
-                itemBuilder: (context, index) =>
-                    SessionListItem(session: sessions[index]),
-              ),
+        data: (state) {
+          if (state.sessions.isEmpty) return const EmptyHistoryView();
+
+          return ListView.separated(
+            controller: _scrollController,
+            padding: const EdgeInsets.all(16),
+            itemCount: state.sessions.length + (state.hasMore ? 1 : 0),
+            separatorBuilder: (_, __) => const SizedBox(height: 8),
+            itemBuilder: (context, index) {
+              if (index == state.sessions.length) {
+                return const Padding(
+                  padding: EdgeInsets.symmetric(vertical: 16),
+                  child: Center(child: CircularProgressIndicator()),
+                );
+              }
+              return SessionListItem(session: state.sessions[index]);
+            },
+          );
+        },
         loading: () => const Center(child: CircularProgressIndicator()),
         error: (e, _) => Center(child: Text('Error: $e')),
       ),

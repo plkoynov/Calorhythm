@@ -20,6 +20,12 @@ class WorkoutSessionDao extends DatabaseAccessor<AppDatabase>
             ..limit(1))
           .getSingleOrNull();
 
+  Future<List<WorkoutSessionTableData>> getPage(int limit, int offset) =>
+      (select(workoutSessionTable)
+            ..orderBy([(t) => OrderingTerm.desc(t.startTime)])
+            ..limit(limit, offset: offset))
+          .get();
+
   Future<List<WorkoutSessionTableData>> getCompleted() =>
       (select(workoutSessionTable)
             ..where((t) => t.status.equalsValue(SessionStatus.completed))
