@@ -3,7 +3,7 @@ name: Sync Copilot Instructions
 on:
   workflow_dispatch:
   push:
-    branches: [main]
+    branches: [master, development]
     paths:
       - 'docs/rules/**'
 
