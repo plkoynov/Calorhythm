@@ -5,8 +5,18 @@ import 'package:calorhythm/application/dtos/workout_history_filter.dart';
 import 'package:calorhythm/presentation/features/history/providers/history_provider.dart';
 
 const _months = [
-  'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
-  'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec',
+  'Jan',
+  'Feb',
+  'Mar',
+  'Apr',
+  'May',
+  'Jun',
+  'Jul',
+  'Aug',
+  'Sep',
+  'Oct',
+  'Nov',
+  'Dec',
 ];
 
 String _fmtDate(DateTime d) =>
@@ -51,13 +61,11 @@ class DateFilterChip extends ConsumerWidget {
                   .applyFilter(current.clearDate());
             }
           : null,
-      backgroundColor: isActive
-          ? Theme.of(context).colorScheme.primaryContainer
-          : null,
+      backgroundColor:
+          isActive ? Theme.of(context).colorScheme.primaryContainer : null,
       labelStyle: TextStyle(
-        color: isActive
-            ? Theme.of(context).colorScheme.onPrimaryContainer
-            : null,
+        color:
+            isActive ? Theme.of(context).colorScheme.onPrimaryContainer : null,
         fontWeight: isActive ? FontWeight.w600 : FontWeight.normal,
       ),
       onPressed: () => _showDatePicker(context, ref),
@@ -65,11 +73,9 @@ class DateFilterChip extends ConsumerWidget {
   }
 
   Future<void> _showDatePicker(BuildContext context, WidgetRef ref) async {
-    final current = ref
-            .read(workoutHistoryNotifierProvider)
-            .valueOrNull
-            ?.filter ??
-        const WorkoutHistoryFilter();
+    final current =
+        ref.read(workoutHistoryNotifierProvider).valueOrNull?.filter ??
+            const WorkoutHistoryFilter();
 
     final now = DateTime.now();
     final result = await showDateRangePicker(

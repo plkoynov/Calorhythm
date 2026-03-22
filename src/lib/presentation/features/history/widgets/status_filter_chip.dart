@@ -54,13 +54,11 @@ class StatusFilterChip extends ConsumerWidget {
                   .applyFilter(current.clearStatuses());
             }
           : null,
-      backgroundColor: isActive
-          ? Theme.of(context).colorScheme.primaryContainer
-          : null,
+      backgroundColor:
+          isActive ? Theme.of(context).colorScheme.primaryContainer : null,
       labelStyle: TextStyle(
-        color: isActive
-            ? Theme.of(context).colorScheme.onPrimaryContainer
-            : null,
+        color:
+            isActive ? Theme.of(context).colorScheme.onPrimaryContainer : null,
         fontWeight: isActive ? FontWeight.w600 : FontWeight.normal,
       ),
       onPressed: () => _showStatusPicker(context, ref),
@@ -68,11 +66,9 @@ class StatusFilterChip extends ConsumerWidget {
   }
 
   Future<void> _showStatusPicker(BuildContext context, WidgetRef ref) async {
-    final current = ref
-            .read(workoutHistoryNotifierProvider)
-            .valueOrNull
-            ?.filter ??
-        const WorkoutHistoryFilter();
+    final current =
+        ref.read(workoutHistoryNotifierProvider).valueOrNull?.filter ??
+            const WorkoutHistoryFilter();
     final selected = Set<SessionStatus>.from(current.statuses);
 
     final result = await showModalBottomSheet<Set<SessionStatus>>(

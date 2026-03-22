@@ -28,8 +28,7 @@ class WorkoutHistoryFilter {
         endDate: clearEndDate ? null : (endDate ?? this.endDate),
       );
 
-  WorkoutHistoryFilter clearDate() =>
-      WorkoutHistoryFilter(statuses: statuses);
+  WorkoutHistoryFilter clearDate() => WorkoutHistoryFilter(statuses: statuses);
 
   WorkoutHistoryFilter clearStatuses() =>
       WorkoutHistoryFilter(startDate: startDate, endDate: endDate);

@@ -71,7 +71,8 @@ class _HistoryScreenState extends ConsumerState<HistoryScreen> {
                               child: Center(child: CircularProgressIndicator()),
                             );
                           }
-                          return SessionListItem(session: state.sessions[index]);
+                          return SessionListItem(
+                              session: state.sessions[index]);
                         },
                       ),
               ),
