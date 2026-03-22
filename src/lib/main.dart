@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import 'core/theme/app_theme.dart';
-import 'features/splash/presentation/screens/splash_screen.dart';
-import 'router/app_router.dart';
+import 'package:calorhythm/presentation/theme/app_theme.dart';
+import 'package:calorhythm/presentation/features/splash/screens/splash_screen.dart';
+import 'package:calorhythm/presentation/router/app_router.dart';
 
 void main() {
   runApp(

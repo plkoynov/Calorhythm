@@ -1,6 +1,7 @@
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import 'package:calorhythm/di/app_providers.dart';
+import 'package:calorhythm/domain/entities/exercise_breakdown_entry.dart';
 import 'package:calorhythm/application/usecases/session/get_activity_charts.dart';
 import 'package:calorhythm/application/usecases/session/get_statistics.dart';
 
