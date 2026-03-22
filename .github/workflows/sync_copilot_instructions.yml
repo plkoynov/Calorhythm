@@ -22,7 +22,7 @@ jobs:
           echo "" >> "$OUTPUT"
           echo "> Auto-generated from \`docs/rules/\`. Edit source files there, not here." >> "$OUTPUT"
 
-          for file in docs/rules/architecture.md docs/rules/coding.md docs/rules/domain.md docs/rules/application.md docs/rules/infrastructure.md docs/rules/presentation.md docs/rules/di.md; do
+          for file in docs/rules/architecture.md docs/rules/coding.md docs/rules/domain.md docs/rules/application.md docs/rules/infrastructure.md docs/rules/presentation.md docs/rules/di.md docs/rules/review.md; do
             if [ -f "$file" ]; then
               echo "" >> "$OUTPUT"
               echo "---" >> "$OUTPUT"
