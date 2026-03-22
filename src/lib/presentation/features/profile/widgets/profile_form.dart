@@ -54,8 +54,9 @@ class _ProfileFormState extends ConsumerState<ProfileForm> {
     if (currentName != p?.name) return true;
     if (_weightCtrl.text != (p?.weightKg.toString() ?? '')) return true;
     if (_heightCtrl.text != (p?.heightCm.toString() ?? '')) return true;
-    if (_useRepMultiplier != (p?.useRepMultiplierForCalories ?? false))
+    if (_useRepMultiplier != (p?.useRepMultiplierForCalories ?? false)) {
       return true;
+    }
     return false;
   }
 

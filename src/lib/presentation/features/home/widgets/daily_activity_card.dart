@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import 'package:calorhythm/domain/entities/exercise_breakdown_entry.dart';
 import 'package:calorhythm/presentation/features/home/providers/home_provider.dart';
 import 'package:calorhythm/presentation/features/home/widgets/activity_metric.dart';
 import 'package:calorhythm/presentation/features/home/widgets/concentric_section.dart';

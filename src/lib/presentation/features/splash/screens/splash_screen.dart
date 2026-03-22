@@ -26,7 +26,7 @@ class SplashScreen extends StatelessWidget {
             Text(
               'Warming up...',
               style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                    color: AppColors.onBackground.withOpacity(0.6),
+                    color: AppColors.onBackground.withValues(alpha: 0.6),
                     letterSpacing: 0.5,
                   ),
             ),

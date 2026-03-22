@@ -1,5 +1,3 @@
-import 'package:drift/drift.dart';
-
 import 'package:calorhythm/domain/entities/workout_session.dart';
 import 'package:calorhythm/domain/repositories/workout_session_repository.dart';
 import 'package:calorhythm/infrastructure/persistence/datasources/local/app_database.dart';
@@ -44,7 +42,7 @@ class WorkoutSessionRepositoryImpl implements WorkoutSessionRepository {
 
   @override
   Future<WorkoutSession> start(double userWeightKg) async {
-    final id = await _db.workoutSessionDao.insert(
+    await _db.workoutSessionDao.insert(
       WorkoutSessionTableCompanion.insert(
         startTime: DateTime.now(),
         status: SessionStatus.inProgress,

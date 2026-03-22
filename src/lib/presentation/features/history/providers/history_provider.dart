@@ -65,20 +65,20 @@ class WorkoutHistoryNotifier extends _$WorkoutHistoryNotifier {
 
 @riverpod
 Future<List<ExerciseEntry>> sessionDetailEntries(
-  SessionDetailEntriesRef ref,
+  Ref ref,
   int sessionId,
 ) =>
     ref.watch(getSessionEntriesProvider).call(sessionId);
 
 @riverpod
-Future<void> deleteSession(DeleteSessionRef ref, int sessionId) async {
+Future<void> deleteSession(Ref ref, int sessionId) async {
   await ref.read(deleteWorkoutSessionProvider).call(sessionId);
   ref.invalidate(workoutHistoryNotifierProvider);
 }
 
 @riverpod
 Future<double> sessionTotalCalories(
-  SessionTotalCaloriesRef ref,
+  Ref ref,
   int sessionId,
 ) async {
   final entries =

@@ -13,7 +13,7 @@ part 'exercises_provider.g.dart';
 // ---------------------------------------------------------------------------
 
 @riverpod
-Future<WorkoutSession?> activeSession(ActiveSessionRef ref) =>
+Future<WorkoutSession?> activeSession(Ref ref) =>
     ref.watch(getActiveSessionProvider).call();
 
 // ---------------------------------------------------------------------------
@@ -21,7 +21,7 @@ Future<WorkoutSession?> activeSession(ActiveSessionRef ref) =>
 // ---------------------------------------------------------------------------
 
 @riverpod
-Future<List<ExerciseEntry>> sessionEntries(SessionEntriesRef ref) async {
+Future<List<ExerciseEntry>> sessionEntries(Ref ref) async {
   final session = await ref.watch(activeSessionProvider.future);
   if (session == null) return [];
   return ref.watch(getSessionEntriesProvider).call(session.id);
@@ -32,7 +32,7 @@ Future<List<ExerciseEntry>> sessionEntries(SessionEntriesRef ref) async {
 // ---------------------------------------------------------------------------
 
 @riverpod
-Future<List<Exercise>> recentExercises(RecentExercisesRef ref) =>
+Future<List<Exercise>> recentExercises(Ref ref) =>
     ref.watch(getRecentExercisesProvider).call();
 
 // ---------------------------------------------------------------------------
@@ -41,7 +41,7 @@ Future<List<Exercise>> recentExercises(RecentExercisesRef ref) =>
 
 @riverpod
 Future<List<Exercise>> exerciseSearch(
-  ExerciseSearchRef ref,
+  Ref ref,
   String query,
 ) =>
     ref.watch(searchExercisesProvider).call(query);

@@ -39,7 +39,7 @@ class ActiveSessionView extends ConsumerWidget {
             child: ListView(
               padding: const EdgeInsets.all(16),
               children: [
-                SectionHeader(title: 'This Session'),
+                const SectionHeader(title: 'This Session'),
                 const SizedBox(height: 8),
                 entriesAsync.when(
                   data: (entries) => entries.isEmpty
@@ -61,7 +61,7 @@ class ActiveSessionView extends ConsumerWidget {
                 const SizedBox(height: 24),
                 Row(
                   children: [
-                    SectionHeader(title: 'Recent Exercises'),
+                    const SectionHeader(title: 'Recent Exercises'),
                     const Spacer(),
                     AddExerciseButton(sessionId: sessionId),
                   ],

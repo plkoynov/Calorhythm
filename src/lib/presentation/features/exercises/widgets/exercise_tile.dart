@@ -27,7 +27,7 @@ class ExerciseTile extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Icon(Icons.fitness_center, color: Colors.white, size: 32),
+              const Icon(Icons.fitness_center, color: Colors.white, size: 32),
               const Spacer(),
               Text(
                 exercise.name,
@@ -42,7 +42,7 @@ class ExerciseTile extends StatelessWidget {
               Text(
                 'MET ${exercise.metValue}',
                 style: TextStyle(
-                  color: Colors.white.withOpacity(0.8),
+                  color: Colors.white.withValues(alpha: 0.8),
                   fontSize: 12,
                 ),
               ),

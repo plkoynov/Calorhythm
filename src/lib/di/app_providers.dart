@@ -31,26 +31,26 @@ part 'app_providers.g.dart';
 // ---------------------------------------------------------------------------
 
 @Riverpod(keepAlive: true)
-AppDatabase appDatabase(AppDatabaseRef ref) {
+AppDatabase appDatabase(Ref ref) {
   final db = AppDatabase();
   ref.onDispose(db.close);
   return db;
 }
 
 @riverpod
-WorkoutSessionRepository sessionRepository(SessionRepositoryRef ref) =>
+WorkoutSessionRepository sessionRepository(Ref ref) =>
     WorkoutSessionRepositoryImpl(ref.watch(appDatabaseProvider));
 
 @riverpod
-ExerciseRepository exerciseRepository(ExerciseRepositoryRef ref) =>
+ExerciseRepository exerciseRepository(Ref ref) =>
     ExerciseRepositoryImpl(ref.watch(appDatabaseProvider));
 
 @riverpod
-ExerciseEntryRepository entryRepository(EntryRepositoryRef ref) =>
+ExerciseEntryRepository entryRepository(Ref ref) =>
     ExerciseEntryRepositoryImpl(ref.watch(appDatabaseProvider));
 
 @riverpod
-ProfileRepository profileRepository(ProfileRepositoryRef ref) =>
+ProfileRepository profileRepository(Ref ref) =>
     ProfileRepositoryImpl(ref.watch(appDatabaseProvider));
 
 // ---------------------------------------------------------------------------
@@ -58,54 +58,54 @@ ProfileRepository profileRepository(ProfileRepositoryRef ref) =>
 // ---------------------------------------------------------------------------
 
 @riverpod
-GetActiveSession getActiveSession(GetActiveSessionRef ref) =>
+GetActiveSession getActiveSession(Ref ref) =>
     GetActiveSession(ref.watch(sessionRepositoryProvider));
 
 @riverpod
-GetSessionEntries getSessionEntries(GetSessionEntriesRef ref) =>
+GetSessionEntries getSessionEntries(Ref ref) =>
     GetSessionEntries(ref.watch(entryRepositoryProvider));
 
 @riverpod
-SearchExercises searchExercises(SearchExercisesRef ref) =>
+SearchExercises searchExercises(Ref ref) =>
     SearchExercises(ref.watch(exerciseRepositoryProvider));
 
 @riverpod
-StartWorkoutSession startWorkoutSession(StartWorkoutSessionRef ref) =>
+StartWorkoutSession startWorkoutSession(Ref ref) =>
     StartWorkoutSession(
       profileRepository: ref.watch(profileRepositoryProvider),
       sessionRepository: ref.watch(sessionRepositoryProvider),
     );
 
 @riverpod
-CompleteWorkoutSession completeWorkoutSession(CompleteWorkoutSessionRef ref) =>
+CompleteWorkoutSession completeWorkoutSession(Ref ref) =>
     CompleteWorkoutSession(ref.watch(sessionRepositoryProvider));
 
 @riverpod
-AbandonWorkoutSession abandonWorkoutSession(AbandonWorkoutSessionRef ref) =>
+AbandonWorkoutSession abandonWorkoutSession(Ref ref) =>
     AbandonWorkoutSession(ref.watch(sessionRepositoryProvider));
 
 @riverpod
-GetWorkoutHistory getWorkoutHistory(GetWorkoutHistoryRef ref) =>
+GetWorkoutHistory getWorkoutHistory(Ref ref) =>
     GetWorkoutHistory(ref.watch(sessionRepositoryProvider));
 
 @riverpod
-DeleteWorkoutSession deleteWorkoutSession(DeleteWorkoutSessionRef ref) =>
+DeleteWorkoutSession deleteWorkoutSession(Ref ref) =>
     DeleteWorkoutSession(ref.watch(sessionRepositoryProvider));
 
 @riverpod
-GetUserProfile getUserProfile(GetUserProfileRef ref) =>
+GetUserProfile getUserProfile(Ref ref) =>
     GetUserProfile(ref.watch(profileRepositoryProvider));
 
 @riverpod
-SaveUserProfile saveUserProfile(SaveUserProfileRef ref) =>
+SaveUserProfile saveUserProfile(Ref ref) =>
     SaveUserProfile(ref.watch(profileRepositoryProvider));
 
 @riverpod
-GetRecentExercises getRecentExercises(GetRecentExercisesRef ref) =>
+GetRecentExercises getRecentExercises(Ref ref) =>
     GetRecentExercises(ref.watch(entryRepositoryProvider));
 
 @riverpod
-RecordExerciseSet recordExerciseSet(RecordExerciseSetRef ref) =>
+RecordExerciseSet recordExerciseSet(Ref ref) =>
     RecordExerciseSet(
       exerciseRepository: ref.watch(exerciseRepositoryProvider),
       sessionRepository: ref.watch(sessionRepositoryProvider),
@@ -113,11 +113,11 @@ RecordExerciseSet recordExerciseSet(RecordExerciseSetRef ref) =>
     );
 
 @riverpod
-GetStatistics getStatistics(GetStatisticsRef ref) =>
+GetStatistics getStatistics(Ref ref) =>
     GetStatistics(ref.watch(sessionRepositoryProvider));
 
 @riverpod
-GetActivityCharts getActivityCharts(GetActivityChartsRef ref) =>
+GetActivityCharts getActivityCharts(Ref ref) =>
     GetActivityCharts(
       sessionRepository: ref.watch(sessionRepositoryProvider),
       entryRepository: ref.watch(entryRepositoryProvider),

@@ -8,15 +8,15 @@ import 'package:calorhythm/application/usecases/session/get_statistics.dart';
 part 'home_provider.g.dart';
 
 @riverpod
-Future<WorkoutStatistics> todayStats(TodayStatsRef ref) =>
+Future<WorkoutStatistics> todayStats(Ref ref) =>
     ref.watch(getStatisticsProvider).forToday();
 
 @riverpod
-Future<WorkoutStatistics> weekStats(WeekStatsRef ref) =>
+Future<WorkoutStatistics> weekStats(Ref ref) =>
     ref.watch(getStatisticsProvider).forThisWeek();
 
 @riverpod
-Future<WorkoutStatistics> monthStats(MonthStatsRef ref) =>
+Future<WorkoutStatistics> monthStats(Ref ref) =>
     ref.watch(getStatisticsProvider).forThisMonth();
 
 // ---------------------------------------------------------------------------
@@ -25,19 +25,19 @@ Future<WorkoutStatistics> monthStats(MonthStatsRef ref) =>
 
 @riverpod
 Future<List<ExerciseBreakdownEntry>> todayPieChart(
-        TodayPieChartRef ref) =>
+        Ref ref) =>
     ref.watch(getActivityChartsProvider).forTodayPieChart();
 
 @riverpod
-Future<List<DailyCalories>> weekBarChart(WeekBarChartRef ref) =>
+Future<List<DailyCalories>> weekBarChart(Ref ref) =>
     ref.watch(getActivityChartsProvider).forWeekBarChart();
 
 @riverpod
-Future<List<DailyCalories>> monthBarChart(MonthBarChartRef ref) =>
+Future<List<DailyCalories>> monthBarChart(Ref ref) =>
     ref.watch(getActivityChartsProvider).forMonthBarChart();
 
 @riverpod
-Future<bool> hasAnyActivity(HasAnyActivityRef ref) async {
+Future<bool> hasAnyActivity(Ref ref) async {
   final results = await Future.wait([
     ref.watch(todayStatsProvider.future),
     ref.watch(weekStatsProvider.future),

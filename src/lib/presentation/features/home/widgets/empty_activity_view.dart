@@ -21,7 +21,7 @@ class EmptyActivityView extends ConsumerWidget {
             Icon(
               Icons.bar_chart_rounded,
               size: 72,
-              color: theme.colorScheme.onSurface.withOpacity(0.2),
+              color: theme.colorScheme.onSurface.withValues(alpha: 0.2),
             ),
             const SizedBox(height: 20),
             Text(
@@ -35,7 +35,7 @@ class EmptyActivityView extends ConsumerWidget {
               'Every great streak starts with a single set. Log your first workout and start building momentum.',
               textAlign: TextAlign.center,
               style: theme.textTheme.bodySmall?.copyWith(
-                color: theme.colorScheme.onSurface.withOpacity(0.5),
+                color: theme.colorScheme.onSurface.withValues(alpha: 0.5),
               ),
             ),
             const SizedBox(height: 28),

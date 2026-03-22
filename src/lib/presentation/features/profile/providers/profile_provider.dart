@@ -6,7 +6,7 @@ import 'package:calorhythm/domain/entities/user_profile.dart';
 part 'profile_provider.g.dart';
 
 @riverpod
-Future<UserProfile?> userProfile(UserProfileRef ref) =>
+Future<UserProfile?> userProfile(Ref ref) =>
     ref.watch(getUserProfileProvider).call();
 
 @riverpod
